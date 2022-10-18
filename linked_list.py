@@ -33,6 +33,30 @@ class LinkedList():
         Returns: A boolean depending on whether or not the list is empty."""
         return self._head == None
 
+    def sort(self):
+        """Sorts the names in a Linked List by alphabetical order.
+        
+        Parameters: None.
+        
+        Returns: None."""
+        ll = LinkedList()
+        if self._head != None and self._head._next != None:
+            while self._head != None:
+                current = self._head
+                self._head = current._next
+                if ll._head == None or ll._head._name >= current._name:
+                    ll.add(current)
+                else:
+                    current_2 = ll._head
+                    while current_2 != None:
+                        if current_2._next == None or \
+                        current_2._next._name >= current._name:
+                            current._next = current_2._next
+                            current_2._next = current
+                            break
+                        current_2 = current_2._next
+            self._head = ll._head
+
 class Node():
     def __init__(self, name):
         """Instantiates a Node object with its name attribute set to name,
