@@ -83,15 +83,15 @@ def find_mutuals_of(ll, name, alist):
         alist is a list of strings with each string representing a person's
         name.
     
-    Returns: A list that contains any mutual friends."""
-    mutuals = []
+    Returns: A Linked List that contains any mutual friends."""
+    mutuals = LinkedList()
     current = ll._head
     while current._name != name:
         current = current._next
     current = current._friends._head
     while current != None:
         if current._name in alist:
-            mutuals.append(current._name)
+            mutuals.add(Node(current._name))
         current = current._next
     return mutuals
 
@@ -127,12 +127,12 @@ def main():
     if known == True:
         friends = get_friends_of(ll, name1)
         mutuals = find_mutuals_of(ll, name2, friends)
-        if mutuals != []:
-            i = 0
+        if mutuals._head != None:
             mutuals.sort()
             print("Friends in common:")
-            while i != len(mutuals):
-                print(mutuals[i])
-                i += 1
+            current = mutuals._head
+            while current != None:
+                print(current._name)
+                current = current._next
 
 main()
