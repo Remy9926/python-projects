@@ -3,7 +3,12 @@
     Author: Ethan Huang
     Purpose: Take a single line of input that is supposed to represent a
         street and use recursion to print out an ASCII rendering of the
-        street.
+        street. The format for a string would be the letter of the
+        object that you want to build (b, p, or e) followed by a colon,
+        and its dimensions separated by whitespace. Each object would then be
+        separated by commas. Buildings (b) take width, height, and brick.
+        Parks (p) take width and foliage. Empty lots (e) take width and trash.
+        An example of each would be as follows "b:5,7,x p:19,* e:7,__~"
     CSC 120 FA22 001
 """
 
