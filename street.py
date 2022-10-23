@@ -3,12 +3,7 @@
     Author: Ethan Huang
     Purpose: Take a single line of input that is supposed to represent a
         street and use recursion to print out an ASCII rendering of the
-        street. The format for a string would be the letter of the
-        object that you want to build (b, p, or e) followed by a colon,
-        and its dimensions separated by whitespace. Each object would then be
-        separated by commas. Buildings (b) take width, height, and brick.
-        Parks (p) take width and foliage. Empty lots (e) take width and trash.
-        An example of each would be as follows "b:5,7,x p:19,* e:7,__~"
+        street.
     CSC 120 FA22 001
 """
 
@@ -90,7 +85,8 @@ def build_building(width, height, brick, astring, height2):
             return astring
         else:
             astring += (brick * width + "\n")
-            return build_building(width, height - 1, brick, astring, height2 - 1)
+            return \
+                build_building(width, height - 1, brick, astring, height2 - 1)
 
 def build_park(width, foliage, num, astring, height):
     """Creates a park street object by taking in the width, its foliage,
@@ -122,10 +118,12 @@ def build_park(width, foliage, num, astring, height):
             astring += ((" " * half) + "|" + (" " * half) + "\n")
             return build_park(width, foliage, num - 1, astring, height - 1)
         if num == 3:
-            astring += ((" " * (half - 2)) + (foliage * 5) + (" " * (half - 2)) + "\n")
+            astring += \
+                (" " * (half - 2)) + (foliage * 5) + (" " * (half - 2)) + "\n"
             return build_park(width, foliage, num - 1, astring, height - 1)
         if num == 4:
-            astring += ((" " * (half - 1)) + (foliage * 3) + (" " * (half - 1) + "\n"))
+            astring += \
+                (" " * (half - 1)) + (foliage * 3) + (" " * (half - 1) + "\n")
             return build_park(width, foliage, num - 1, astring, height - 1)
         else:
             astring += ((" " * half) + foliage + (" " * half) + "\n")
@@ -190,22 +188,26 @@ def run_through_list(alist, alist2, height):
         x = alist[0].split(":", 1)
         y = x[1].split(",")
         if x[0] == "b":
-            alist2.append(build_building(int(y[0]), int(y[1]), y[2], "", height))
+            alist2.append(build_building \
+                (int(y[0]), int(y[1]), y[2], "", height))
             return run_through_list(alist[1:], alist2, height)
         elif x[0] == "p":
             alist2.append(build_park(int(y[0]), y[1], 5, "", height))
             return run_through_list(alist[1:], alist2, height)
         else:
-            alist2.append(process_empty_lot(build_empty_lot(int(y[0]), y[1], "", height)))
+            alist2.append(process_empty_lot \
+                (build_empty_lot(int(y[0]), y[1], "", height)))
             return run_through_list(alist[1:], alist2, height)
 
 def create_grid(alist, alist2):
     """Takes a list of ASCII renderings of the street objects and splits up 
         each street object by an indented line to get each row of the object.
         
-    Parameters: alist is a list of the ASCII renderings of different street objects.
+    Parameters: alist is a list of the ASCII renderings of different street
+        objects.
     
-        alist2 is the a list of lists containing a list of each street object's rows.
+        alist2 is the a list of lists containing a list of each street
+            object's rows.
         
     Returns: A list of lists of each street object's rows."""
     if alist == []:
