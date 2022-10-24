@@ -8,7 +8,7 @@
     CSC 120 FA22 001
 """
 
-import csv, string
+import csv, string, sys
 
 class Word():
     def __init__(self, word):
@@ -88,7 +88,7 @@ def merge_word(list1, list2, merged):
         if list1[0].count() > list2[0].count():
             merged.append(list1[0])
             return merge_word(list1[1:], list2, merged)
-        elif list1[0].count() <= list2[0].count():
+        elif list1[0].count() < list2[0].count():
             merged.append(list2[0])
             return merge_word(list1, list2[1:], merged)
         else:
@@ -201,4 +201,5 @@ def main():
         if thing.count() >= int(k):
             print("{} : {:d}".format(thing.word(), thing.count()))
 
+sys.setrecursionlimit(4000)
 main()
