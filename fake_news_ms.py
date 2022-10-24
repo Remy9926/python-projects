@@ -198,7 +198,9 @@ def main():
     n = input()
     k = merged[int(n)].count()
     for thing in merged:
-        if thing.count() >= int(k):
+        if thing == merged[0]:
+            print("File: N: " + thing.word() + " : " + str(thing.count()))
+        elif thing.count() >= int(k):
             print("{} : {:d}".format(thing.word(), thing.count()))
 
 sys.setrecursionlimit(4000)
