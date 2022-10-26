@@ -184,8 +184,24 @@ def create_list_of_words(alist, line):
         if found == False:
             alist.append(Word(word.lower()))
 
+def print_out_words(alist, k):
+    """Takes a list of Word objects and recursively searches through it for
+        any objects that have a count equal to or greater than k and prints
+        their words out.
+        
+    Parameters: alist is a list of Word objects.
+        k is an integer.
+    
+    Returns: None."""
+    if alist == []:
+        return
+    else:
+        if alist[0]._count >= k:
+            print("{} : {:d}".format(alist[0].word(), alist[0].count()))
+        return print_out_words(alist[1:], k)
+
 def main():
-    afile = csv.reader(open(input(), "r"))
+    afile = csv.reader(open(input("File: "), "r"))
     alist = []
     for line in afile:
         if "#" not in line[0]:
@@ -195,13 +211,9 @@ def main():
             line = get_rid_of_small_words(line)
             create_list_of_words(alist, line)
     merged = merge_sort_list(alist)
-    n = input()
+    n = input("N: ")
     k = merged[int(n)].count()
-    for thing in merged:
-        if thing == merged[0]:
-            print("File: N: " + thing.word() + " : " + str(thing.count()))
-        elif thing.count() >= int(k):
-            print("{} : {:d}".format(thing.word(), thing.count()))
+    print_out_words(merged, k)
 
 sys.setrecursionlimit(4000)
 main()
