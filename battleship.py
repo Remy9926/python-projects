@@ -121,6 +121,26 @@ class Board():
             within the Board object."""
         return str(self.ships())
 
+    def show_board(self):
+        """Prints out the whole board with empty spaces as a dot and
+            any occupied spaces are represented by the ship that occupies that
+            space.
+        
+        Parameters: None.
+        
+        Returns: A string representation of the board."""
+        astring = ""
+        for row in self.board():
+            astring2 = ""
+            for column in row:
+                if column.ship() == None:
+                    astring2 += "."
+                elif column.ship() != None:
+                    astring2 += column.ship().ship()
+            astring2 += "\n"
+            astring += astring2
+        return astring
+
 class Ship():
     """The Ship class represents a ship in Battleship. It holds the attributes
         ship, size, positions, and safe. Ship is the abbreviated name of the
@@ -178,7 +198,7 @@ class Ship():
         Returns: None."""
         i = 0
         while i != len(self.safe()):
-            if self.safe()[i] == (x, y):
+            if self.safe()[i] == (y, 9 - x):
                 self.safe().pop(i)
                 break
             i += 1
@@ -254,28 +274,6 @@ def illegal_guess():
 
 def create_ship_x(ship, val1, val2, misc_val):
     """Creates a Ship object and adds coordinates to its position attribute
-        list based on the values that are passed through as arguments. The x
-        coordinate of the ship's positions are all different.
-        
-    Parameters: ship is the name of the Ship object that is going to be
-        created.
-    val1 is the x coordinate of one of its edges.
-    val2 is the x coordinate of its other edge.
-    misc_val is the constant y coordinate of the ship.
-    
-    Returns: A reference to the new Ship object that is created."""
-    if val1 > val2:
-        new_ship = Ship(ship, int(val1) - int(val2) + 1)
-        for num in range(int(val2), int(val1) + 1):
-            new_ship.set_position(num, int(misc_val))
-    if val1 < val2:
-        new_ship = Ship(ship, int(val2) - int(val1) + 1)
-        for num in range(int(val1), int(val2) + 1):
-            new_ship.set_position(num, int(misc_val))
-    return new_ship
-
-def create_ship_y(ship, val1, val2, misc_val):
-    """Creates a Ship object and adds coordinates to its position attribute
         list based on the values that are passed through as arguments. The y
         coordinate of the ship's positions are all different.
         
@@ -286,14 +284,36 @@ def create_ship_y(ship, val1, val2, misc_val):
     misc_val is the constant x coordinate of the ship.
     
     Returns: A reference to the new Ship object that is created."""
-    if val1 > val2:
-        new_ship = Ship(ship, int(val1) - int(val2) + 1)
-        for num in range(int(val2), int(val1) + 1):
-            new_ship.set_position(int(misc_val), num)
     if val1 < val2:
-        new_ship = Ship(ship, int(val2) - int(val1) + 1)
-        for num in range(int(val1), int(val2) + 1):
-            new_ship.set_position(int(misc_val), num)
+        new_ship = Ship(ship, val2 - val1 + 1)
+        for num in range(val1, val2 + 1):
+            new_ship.set_position(misc_val, num)
+    if val1 > val2:
+        new_ship = Ship(ship, val1 - val2 + 1)
+        for num in range(val2, val1 + 1):
+            new_ship.set_position(misc_val, num)
+    return new_ship
+
+def create_ship_y(ship, val1, val2, misc_val):
+    """Creates a Ship object and adds coordinates to its position attribute
+        list based on the values that are passed through as arguments. The x
+        coordinate of the ship's positions are all different.
+        
+    Parameters: ship is the name of the Ship object that is going to be
+        created.
+    val1 is the x coordinate of one of its edges.
+    val2 is the x coordinate of its other edge.
+    misc_val is the constant y coordinate of the ship.
+    
+    Returns: A reference to the new Ship object that is created."""
+    if val1 < val2:
+        new_ship = Ship(ship, val2 - val1 + 1)
+        for num in range(val1, val2 + 1):
+            new_ship.set_position(num, misc_val)
+    if val1 > val2:
+        new_ship = Ship(ship, val1 - val2 + 1)
+        for num in range(val2, val1 + 1):
+            new_ship.set_position(num, misc_val)
     return new_ship
 
 def miss(board, x_coord, y_coord):
@@ -307,10 +327,10 @@ def miss(board, x_coord, y_coord):
     y_coord is the y coordinate that Player Two is attacking.
     
     Returns: None."""
-    if board[9 - x_coord][y_coord].guessed() == False:
+    if board[x_coord][y_coord].guessed() == False:
         print("miss")
-        board[9 - x_coord][y_coord].got_guessed()
-    elif board[9 - x_coord][y_coord].guessed() == True:
+        board[x_coord][y_coord].got_guessed()
+    elif board[x_coord][y_coord].guessed() == True:
         print("miss (again)")
 
 def hit(board, x_coord, y_coord, ships_sunk):
@@ -323,16 +343,18 @@ def hit(board, x_coord, y_coord, ships_sunk):
     Parameters: board is the Board object that Player Two is attacking.
     x_coord is the x coordinate that Player Two is attacking.
     y_coord is the y coordinate that Player Two is attacking.
-    ships_sunk is the total number of ships that Player Two has sunk."""
-    if board[9 - x_coord][y_coord].guessed() == False:
-        board[9 - x_coord][y_coord].got_guessed()
-        board[9 - x_coord][y_coord].ship().hit(x_coord, y_coord)
-        if board[9 - x_coord][y_coord].ship().safe() == []:
-            print("{} sunk".format(board[9 - x_coord][y_coord].ship().ship()))
+    ships_sunk is the total number of ships that Player Two has sunk.
+    
+    Returns: The number of ships that Player Two has sunk so far."""
+    if board[x_coord][y_coord].guessed() == False:
+        board[x_coord][y_coord].got_guessed()
+        board[x_coord][y_coord].ship().hit(x_coord, y_coord)
+        if board[x_coord][y_coord].ship().safe() == []:
+            print("{} sunk".format(board[x_coord][y_coord].ship().ship()))
             ships_sunk += 1
-        elif board[9 - x_coord][y_coord].ship().safe() != []:
+        elif board[x_coord][y_coord].ship().safe() != []:
             print("hit")
-    elif board[9 - x_coord][y_coord].guessed() == True:
+    elif board[x_coord][y_coord].guessed() == True:
         print("hit (again)")
     return ships_sunk
 
@@ -346,13 +368,44 @@ def game_over():
     print("all ships sunk: game over")
     sys.exit()
 
-def check_for_overlapping(board, new_ship, line):
+def check_for_overlapping_x(board, new_ship, line):
+    """Checks to see if a coordinate point on the board is already occupied
+        or not.
+    
+    Parameters: board is the board that the Ship objects are placed on.
+        new_ship is a new Ship object that has just been made.
+        line is the line on which the Ship object was created.
+    
+    Returns: The line that an overlapping error occurs. If there is none,
+        then the function returns False."""
     for position in new_ship.positions():
-            if board[9 - position[0]][position[1]].ship() != None:
-                overlapping_error(line)
-            board[9 - position[0]][position[1]].set_ship(new_ship)
+            if board[9 - position[1]][position[0]].ship() != None:
+                return line
+            board[9 - position[1]][position[0]].set_ship(new_ship)
+    return False
+
+def check_for_overlapping_y(board, new_ship, line):
+    """Checks to see if a coordinate point on the board is already occupied
+        or not.
+    
+    Parameters: board is the board that the Ship objects are placed on.
+        new_ship is a new Ship object that has just been made.
+        line is the line on which the Ship object was created.
+    
+    Returns: The line that an overlapping error occurs. If there is none,
+        then the function returns False."""
+    for position in new_ship.positions():
+            if board[9 - position[1]][position[0]].ship() != None:
+                return line
+            board[9 - position[1]][position[0]].set_ship(new_ship)
+    return False
 
 def main():
+    out_of_bounds = False
+    bad_placement = False
+    overlapping = False
+    incorrect_ship_size = False
+
     placement = open(input(), "r")
     guesses = open(input(), "r")
     x = Board()
@@ -366,29 +419,40 @@ def main():
     list_of_ships = []
     
     for line in placement:
+        new_ship = None
         split_line = line.split()
         if split_line[1] != split_line[3] and split_line[2] != split_line[4]:
-            placement_error(line)
+            bad_placement = line
 
         elif int(split_line[1]) not in range(10) or int(split_line[2]) not in range(10) or \
             int(split_line[3]) not in range(10) or int(split_line[4]) not in range(10):
-            out_of_bounds_error(line)
+            out_of_bounds = line
         
         elif split_line[1] != split_line[3]:
-            new_ship = create_ship_x(split_line[0], split_line[1], split_line[3], split_line[2])
+            new_ship = create_ship_y(split_line[0], int(split_line[1]), int(split_line[3]), int(split_line[2]))
+            overlapping = check_for_overlapping_y(x.board(), new_ship, line)
         
         elif split_line[2] != split_line[4]:
-            new_ship = create_ship_y(split_line[0], split_line[2], split_line[4], split_line[1])
-        
-        check_for_overlapping(x.board(), new_ship, line)
+            new_ship = create_ship_x(split_line[0], int(split_line[2]), int(split_line[4]), int(split_line[1]))
+            overlapping = check_for_overlapping_x(x.board(), new_ship, line)
 
         list_of_ships.append(new_ship)
         
-        if new_ship.size() != ship_dict[new_ship.ship().upper()]:
-            ship_size_error(line)
+        if new_ship != None and new_ship.size() != ship_dict[new_ship.ship().upper()]:
+            incorrect_ship_size = line
         
     if len(list_of_ships) != 5:
         fleet_error()
+    if out_of_bounds != False:
+        out_of_bounds_error(out_of_bounds)
+    if bad_placement != False:
+        placement_error(line)
+    if overlapping != False:
+        overlapping_error(line)
+    if incorrect_ship_size != False:
+        ship_size_error(line)
+
+    print(x.show_board())
 
     ships_sunk = 0
     for line in guesses:
@@ -398,13 +462,13 @@ def main():
         if x_coord not in range(10) or y_coord not in range(10):
             illegal_guess()
 
-        elif x.board()[9 - x_coord][y_coord].ship() == None:
+        elif x.board()[9 - y_coord][x_coord].ship() == None:
             miss(x.board(), x_coord, y_coord)
 
-        elif x.board()[9 - x_coord][y_coord].ship() != None:
-            ships_sunk = hit(x.board(), x_coord, y_coord, ships_sunk)
+        elif x.board()[9 - y_coord][x_coord].ship() != None:
+            ships_sunk = hit(x.board(), 9 - y_coord, x_coord, ships_sunk)
         
         if ships_sunk == 5:
             game_over()
-
+    
 main()
