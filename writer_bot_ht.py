@@ -47,7 +47,7 @@ class Hashtable:
             hash -= 1
             while self.pairs()[hash] != None:
                 if hash < 0:
-                    hash = len(self.pairs() - 1)
+                    hash = len(self.pairs()) - 1
                 if self.pairs()[hash][0] == key:
                     self.pairs()[hash][1].append(value)
                 hash -= 1
@@ -82,18 +82,9 @@ class Hashtable:
             
         Returns: True if the key is found in the Hashtable.
             False if the key is not found in the Hashtable."""
-        hash = self._hash(key)
-        if self.pairs()[hash][0] == key:
-            return True
-        if self.pairs()[hash][0] != key:
-            hash -= 1
-        while hash != self._hash(key):
-            if hash < 0:
-                hash = len(self.pairs()) - 1
-            if self.pairs()[hash] != None and self.pairs()[hash][0] == key:
-                return True
-            hash -= 1
-        return False
+        if self.get(key) == None:
+            return False
+        return True
 
     def _hash(self, key):
         """Uses Horner's Rule to hash a given key.
@@ -120,7 +111,7 @@ def create_list_from_file(sfile):
     return alist
 
 def put_into_hashtable(words, adict, alist):
-    """Takes a lsit of words, a Hashtable object, and another list and places
+    """Takes a list of words, a Hashtable object, and another list and places
         the corresponding key-value pairs into the Hashtable.
         
     Parameters: words is a list of all the words that you want to place
@@ -131,11 +122,10 @@ def put_into_hashtable(words, adict, alist):
             as the keys within the Hashtable.
                 
     Returns: None."""
-    while len(words) != 0:
+    for x in range(len(words)):
         val = " ".join(alist)
-        adict.put(val, words[0])
-        alist.append(words[0])
-        words = words[1:]
+        adict.put(val, words[x])
+        alist.append(words[x])
         alist = alist[1:]
 
 def generate_output_list(alist, adict, num_words):
