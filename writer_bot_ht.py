@@ -50,6 +50,7 @@ class Hashtable:
                     hash = len(self.pairs()) - 1
                 if self.pairs()[hash][0] == key:
                     self.pairs()[hash][1].append(value)
+                    return
                 hash -= 1
             self.pairs()[hash] = [key, [value]]
 
@@ -69,7 +70,7 @@ class Hashtable:
         while hash != self._hash(key):
             if hash < 0:
                 hash = len(self.pairs()) - 1
-            if self.pairs()[hash] != None and self.pairs()[hash][0] == key:
+            if self.pairs()[hash][0] == key:
                 return self.pairs()[hash][1]
             hash -= 1
         return None
@@ -139,6 +140,7 @@ def generate_output_list(alist, adict, num_words):
         
     Returns: a list that contains the randomly generated words."""
     output = []
+    i = 0
     while len(output) != num_words:
         key = " ".join(alist)
         val = adict.get(key)
@@ -148,8 +150,9 @@ def generate_output_list(alist, adict, num_words):
         elif len(val) == 1:
             output.append(val[0])
         
-        alist.append(output[len(output) - 1])
+        alist.append(output[i])
         alist = alist[1:]
+        i += 1
     return output
 
 def generate_sentence(output):
