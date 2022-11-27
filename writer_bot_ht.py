@@ -38,21 +38,15 @@ class Hashtable:
         Returns: None."""
         hash = self._hash(key)
         if self.pairs()[hash] == None:
-            self.pairs()[hash] = [key, [value]]
-        
-        elif self.pairs()[hash][0] == key:
-            self.pairs()[hash][1].append(value)
-        
-        elif self.pairs()[hash][0] != key:
+            self.pairs()[hash] = [key, value]
+
+        else:
             hash -= 1
             while self.pairs()[hash] != None:
                 if hash < 0:
                     hash = len(self.pairs()) - 1
-                if self.pairs()[hash][0] == key:
-                    self.pairs()[hash][1].append(value)
-                    return
                 hash -= 1
-            self.pairs()[hash] = [key, [value]]
+            self.pairs()[hash] = [key, value]
 
     def get(self, key):
         """Returns the value given the key from the Hashtable. Returns None
@@ -63,11 +57,12 @@ class Hashtable:
         Returns: the value of the corresponding key-value pair. 
             None if the key does not exist in the Hashtable."""
         hash = self._hash(key)
-        if self.pairs()[hash][0] == key:
+        if self.pairs()[hash] == None:
+            return None
+        elif self.pairs()[hash][0] == key:
             return self.pairs()[hash][1]
-        if self.pairs()[hash][0] != key:
-            hash -= 1
-        while hash != self._hash(key):
+        hash -= 1
+        while self.pairs()[hash] != None and hash != self._hash(key):
             if hash < 0:
                 hash = len(self.pairs()) - 1
             if self.pairs()[hash][0] == key:
@@ -97,6 +92,9 @@ class Hashtable:
         for c in key:
             p = 31*p + ord(c)
         return p % self._size
+    
+    def __str__(self):
+        return str(self.pairs())
 
 def create_list_from_file(sfile):
     """Takes a file and for each line in the file, splits up the words in
@@ -124,8 +122,11 @@ def put_into_hashtable(words, adict, alist):
                 
     Returns: None."""
     for x in range(len(words)):
-        val = " ".join(alist)
-        adict.put(val, words[x])
+        key = " ".join(alist)
+        if key in adict:
+            adict.get(key).append(words[x])
+        else:
+            adict.put(key, [words[x]])
         alist.append(words[x])
         alist = alist[1:]
 
