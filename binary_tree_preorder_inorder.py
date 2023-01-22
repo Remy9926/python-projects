@@ -1,9 +1,6 @@
 """
-    File: huffman.py
-    Author: Ethan Huang
-    Purpose: Construct a binary tree given the preorder and inorder order of
+    Construct a binary tree given the preorder and inorder order of
         the tree as well as decode an encoded sequence.
-    CSC 120 FA22 001
 """
 
 class BinaryTree():
