@@ -1,9 +1,6 @@
 """
-    File: writer_bot.py
-    Author: Ethan Huang
-    Purpose: Simulate a Markov Chain Algorithm to generate text based on
+    Simulate a Markov Chain Algorithm to generate text based on
         preceding words.
-    CSC 120 FA22 001
 """
 
 import random
