@@ -1,9 +1,6 @@
 """
-    File: ngrams.py
-    Author: Ethan Huang
-    Purpose: Reads a file, creates n-grams of a specified length, and returns
+    Reads a file, creates n-grams of a specified length, and returns
         the n-grams that occur most often in the file.
-    CSC 120 FA22 001
 """
 
 class Input():
