@@ -1,10 +1,7 @@
 """
-    File: word_grid.py
-    Author: Ethan Huang
-    Purpose: Takes two integers and creates a list of lists (grid) of the
+    Takes two integers and creates a list of lists (grid) of the
         specified length and width and prints the elements of each list as
         comma-separated values.
-    CSC 120 FA22 001
 """
 
 import random
