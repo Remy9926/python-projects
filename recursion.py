@@ -1,10 +1,7 @@
 """
-    File: street.py
-    Author: Ethan Huang
-    Purpose: Take a single line of input that is supposed to represent a
+    Take a single line of input that is supposed to represent a
         street and use recursion to print out an ASCII rendering of the
         street.
-    CSC 120 FA22 001
 """
 
 def get_heights(x, alist):
