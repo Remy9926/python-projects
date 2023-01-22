@@ -1,11 +1,8 @@
 """
-    File: friends.py
-    Author: Ethan Huang
-    Purpose: Create a Linked List of nodes that consist of peoples' names and
+    Create a Linked List of nodes that consist of peoples' names and
         each node contains a Linked List attribute, which consists of the
         names of people that that person is friends with. Then, take two names
         and print out any mutual friends between the two people.
-    CSC 120 FA22 001
 """
 
 from linked_list import LinkedList, Node
