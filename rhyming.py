@@ -1,10 +1,7 @@
 """
-    File: rhymes.py
-    Ethan Huang
-    Purpose: Takes a file to establish a dictionary of words and their
+    Takes a file to establish a dictionary of words and their
         phonemes. Then, takes in user input and finds words that are perfect
         rhymes to the word input by the user.
-    CSC 120 FA22 001
 """
 
 
