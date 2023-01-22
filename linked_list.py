@@ -1,6 +1,6 @@
 """
     Implements the Linked List class and Node class so that
-        the file friends.py can import this file and use those classes.
+        the file linked_list_friend.py can import this file and use those classes.
 """
 
 class LinkedList():
