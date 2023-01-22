@@ -1,10 +1,7 @@
 """
-    File: writer_bot_ht.py
-    Author: Ethan Huang
-    Purpose: Simulate a Markov Chain Algorithm to generate text based on
+    Simulate a Markov Chain Algorithm to generate text based on
         preceding words while manually implementing a Hashtable without
         using Python dictionaries.
-    CSC 120 FA22 001
 """
 
 import sys
