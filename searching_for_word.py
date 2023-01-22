@@ -1,11 +1,8 @@
 """
-    File: word_search.py
-    Author: Ethan Huang
-    Purpose: Takes two files, a list of words and a grid of letters,
+    Takes two files, a list of words and a grid of letters,
     respectively and searches the grid for any words that are in
     the list of words. Words will be searched for horizontally, vertically,
     and diagonally from the top-left to bottom-right.
-    CSC 120 FA22 001
 """
 
 
