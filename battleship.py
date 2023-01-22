@@ -1,11 +1,8 @@
 """
-    File: battleship.py
-    Author: Ethan Huang
-    Purpose: Mimics a one sided game of Battleship where Player One's board
+    Mimics a one sided game of Battleship where Player One's board
         is formed from one input and another input is used as the guesses 
         of Player Two. Player One's board layout is formed and Player Two's
         decisions are simulated within the program.
-    CSC 120 FA22 001
 """
 
 import sys
@@ -48,19 +45,15 @@ class GridPos():
         self._guessed = True
 
     def x(self):
-        """Getter method for GridPos objects x attribute."""
         return self._x
     
     def y(self):
-        """Getter method for GridPos objects y attribute."""
         return self._y
     
     def ship(self):
-        """Getter method for GridPos objects ship attribute."""
         return self._ship
     
     def guessed(self):
-        """Getter method for GridPos objects guessed attribute."""
         return self._guessed
     
     def __str__(self):
@@ -156,11 +149,9 @@ class Ship():
         self._safe = []
     
     def size(self):
-        """Getter method for the size attribute of a Ship object."""
         return self._size
     
     def ship(self):
-        """Getter method for the ship attribute of a Ship object."""
         return self._ship
     
     def set_position(self, x, y):
@@ -175,11 +166,9 @@ class Ship():
         self._safe.append((x, y))
 
     def positions(self):
-        """Getter method for the positions attribute of a Ship object."""
         return self._positions
     
     def safe(self):
-        """Getter method for the safe attribute of a Ship object."""
         return self._safe
     
     def hit(self, x, y):
