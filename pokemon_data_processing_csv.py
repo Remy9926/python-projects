@@ -1,10 +1,7 @@
 """
-    File: pokemon.py
-    Author: Ethan Huang
-    Purpose: Takes a CSV file that contains Pokemon and their stats and
+    Takes a CSV file that contains Pokemon and their stats and
         computes the total average of each stat per Pokemon type and
         answers queries about these averages.
-    CSC 120 FA22 001
 """
 
 
