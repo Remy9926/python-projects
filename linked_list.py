@@ -1,9 +1,6 @@
 """
-    File: linked_list.py
-    Author: Ethan Huang
-    Purpose: Implements the Linked List class and Node class so that
+    Implements the Linked List class and Node class so that
         the file friends.py can import this file and use those classes.
-    CSC 120 FA22 001
 """
 
 class LinkedList():
