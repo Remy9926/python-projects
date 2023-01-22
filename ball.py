@@ -1,10 +1,7 @@
 """
-    File: bball.py
-    Author: Ethan Huang
-    Purpose: Takes a file of basketball team school names, their conferences,
+    Takes a file of basketball team school names, their conferences,
         and their wins and losses and returns the conferences with the highest
         average win ratios.
-    CSC 120 FA22 001
 """
 
 class Team():
