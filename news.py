@@ -1,9 +1,6 @@
 """
-    File: fake_news.py
-    Author: Ethan Huang
-    Purpose: Takes a csv file of fake news articles and counts how many times
+     Takes a csv file of fake news articles and counts how many times
         each word occurs in the title of each line of the file.
-    CSC 120 FA22 001
 """
 
 import csv, string
