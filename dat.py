@@ -1,13 +1,10 @@
 """
-    File: dates.py
-    Author: Ethan Huang
-    Purpose: Takes a file with dates and creates a Date object for each unique
+    Takes a file with dates and creates a Date object for each unique
         date in its canonical form with the canonical date as an attribute as
         well as a list of events that took place on that date as another
         attribute. The object is then placed into a DateSet object that
         contains a dictionary with the canonical date as keys and Date
         objects as values.
-    CSC 120 FA22 001
 """
 
 class Date:
