@@ -24,30 +24,12 @@ class Team():
         self.process_line(self._line)
 
     def name(self):
-        """A getter method for the name of a Team object.
-        
-        Parameters: None.
-        
-        Returns: The _name attribute of the Team object."""
-
         return self._name
 
     def conf(self):
-        """A getter method for the conference of a Team object.
-        
-        Parameters: None.
-        
-        Returns: None."""
-
         return self._conf
 
     def win_ratio(self):
-        """A getter method for the win ratio of a Team object.
-        
-        Parameters: None.
-        
-        Returns: None."""
-
         return self._win_ratio
 
     def __str__(self):
